@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Trends - Process Monitor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white h-screen p-5 shadow-lg fixed">
+        <h1 class="text-2xl font-bold flex items-center gap-2">
+            <span class="text-indigo-600"><i class="fas fa-bolt"></i></span> Process Monitor
+        </h1>
+        <nav class="mt-6">
+            <ul>
+                <li class="mb-4">
+                    <a href="/" class="flex items-center gap-2 text-gray-700 hover:text-indigo-600 text-lg">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="/historical-trends" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 text-lg font-semibold">
+                        <i class="fas fa-chart-line"></i> Performance Trends
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="/idle-time" class="flex items-center gap-2 text-gray-700 hover:text-indigo-600 text-lg">
+                        <i class="fas fa-clock"></i> Idle Time
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="/settings" class="flex items-center gap-2 text-gray-700 hover:text-indigo-600 text-lg">
+                        <i class="fas fa-cogs"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 ml-64">
+        <h2 class="text-3xl font-bold text-indigo-700">Performance Trends</h2>
+        <p class="text-gray-600">Analyze system performance over time</p>
+
+        <!-- Time Range Selector -->
+        <div class="bg-white p-4 rounded-lg shadow mt-6">
+            <div class="flex flex-wrap gap-4">
+                <button class="time-range-btn bg-indigo-600 text-white px-4 py-2 rounded" data-range="day">Last 24 Hours</button>
+                <button class="time-range-btn bg-gray-200 text-gray-800 px-4 py-2 rounded" data-range="week">Last Week</button>
+                <button class="time-range-btn bg-gray-200 text-gray-800 px-4 py-2 rounded" data-range="month">Last Month</button>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            <!-- CPU Usage Over Time -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-bold mb-4">CPU Usage Over Time</h3>
+                <div class="h-64">
+                    <canvas id="cpu-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Memory Usage Over Time -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-bold mb-4">Memory Usage Over Time</h3>
+                <div class="h-64">
+                    <canvas id="memory-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Processes Table -->
+        <div class="bg-white p-6 mt-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-4">Top Resource-Intensive Processes</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left">Process Name</th>
+                            <th class="py-3 px-4 text-left">Average CPU Usage</th>
+                            <th class="py-3 px-4 text-left">Average Memory Usage</th>
+                            <th class="py-3 px-4 text-left">Peak CPU Usage</th>
+                            <th class="py-3 px-4 text-left">Peak Memory Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="top-processes">
+                        <tr>
+                            <td colspan="5" class="py-10 text-center text-gray-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Loading process data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/historical_trends.js') }}"></script>
+</body>
+</html>

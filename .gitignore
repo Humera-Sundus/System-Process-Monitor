@@ -1,0 +1,7 @@
+client_secret.json
+token.json
+__pycache__/
+*.log
+*.spec
+.ipynb_checkpoints/
+node_modules/

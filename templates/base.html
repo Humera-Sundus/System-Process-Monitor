@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Monitor {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 d-md-block bg-light sidebar p-0" style="min-height: 100vh;">
+                <div class="position-sticky">
+                    <div class="p-4 text-center">
+                        <h4 class="text-primary mb-0">
+                            <i class="fas fa-microchip me-2"></i> Process Monitor
+                        </h4>
+                    </div>
+                    <hr class="my-0">
+                    <div class="p-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">
+                                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link {% if '/historical-trends' in request.path %}active{% endif %}" href="/historical-trends">
+                                    <i class="fas fa-chart-line me-2"></i> Historical Trends
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link {% if '/idle-time' in request.path %}active{% endif %}" href="/idle-time">
+                                    <i class="fas fa-hourglass-half me-2"></i> Idle Time
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link {% if '/settings' in request.path %}active{% endif %}" href="/settings">
+                                    <i class="fas fa-cog me-2"></i> Settings
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-10 ms-sm-auto px-md-4 bg-light text-dark">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
