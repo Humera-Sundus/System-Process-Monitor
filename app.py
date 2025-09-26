@@ -309,7 +309,7 @@ def clear_all_data():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='15374826',
+            password='password',
             database='process_db'
         )
         cursor = conn.cursor()
