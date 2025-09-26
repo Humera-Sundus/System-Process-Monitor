@@ -22,7 +22,7 @@ def connect_db():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="15374826",
+        password="password",
         database="process_db"
     )
 @contextmanager
