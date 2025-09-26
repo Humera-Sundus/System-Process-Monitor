@@ -212,7 +212,7 @@ def send_email_to_user():
         
             client_file = "client_secret.json"
             service = init_gmail_service(client_file)
-            to_address = "mueedhumera@gmail.com"
+            to_address = "reciever's email"
             email_subject = "System Status Report"
             email_body="Please find the attached system status report in JSON format."
             cpu_usage = psutil.cpu_percent(interval=1)
